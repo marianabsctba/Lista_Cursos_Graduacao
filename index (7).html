@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Cursos em Cibersegurança 2026 — Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-deep:#0d0118;--purple-bright:#7c3aed;--purple-light:#a855f7;
+    --purple-glow:#c084fc;--green-neon:#00ff88;--green-dark:#00994f;
+    --card-bg:rgba(30,5,60,.85);--card-border:rgba(124,58,237,.35);
+    --white:#f8f4ff;--gray:#b0a0c8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Poppins',sans-serif;background:var(--purple-deep);color:var(--white);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+  .orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;animation:orb-drift 12s ease-in-out infinite alternate;}
+  .orb-1{width:600px;height:600px;background:rgba(124,58,237,.18);top:-200px;left:-200px;}
+  .orb-2{width:500px;height:500px;background:rgba(0,255,136,.08);bottom:-100px;right:-100px;animation-delay:-6s;}
+  .orb-3{width:300px;height:300px;background:rgba(168,85,247,.12);top:40%;left:40%;animation-delay:-3s;}
+  @keyframes orb-drift{from{transform:scale(1) translate(0,0)}to{transform:scale(1.15) translate(30px,20px)}}
+  .wrapper{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 24px 0;}
+
+  /* HERO */
+  .hero{text-align:center;padding:80px 0 50px;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);border-radius:100px;padding:6px 18px;font-size:12px;font-weight:600;color:var(--green-neon);letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px;animation:pulse-badge 3s ease-in-out infinite;}
+  @keyframes pulse-badge{0%,100%{box-shadow:0 0 0 0 rgba(0,255,136,0)}50%{box-shadow:0 0 20px 4px rgba(0,255,136,.15)}}
+  .hero-badge::before{content:'';width:8px;height:8px;background:var(--green-neon);border-radius:50%;animation:blink 1.4s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .hero h1{font-size:clamp(36px,6vw,72px);font-weight:900;line-height:1.1;letter-spacing:-.02em;background:linear-gradient(135deg,#fff 0%,var(--purple-glow) 40%,var(--green-neon) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+  .hero-sub{font-size:18px;font-weight:400;color:var(--gray);max-width:620px;margin:0 auto 14px;line-height:1.6;}
+  .hero-year{font-size:13px;font-weight:600;color:var(--purple-light);letter-spacing:.1em;text-transform:uppercase;}
+
+  /* STATS */
+  .stats-bar{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:40px 0 36px;}
+  .stat-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:16px 28px;text-align:center;backdrop-filter:blur(12px);min-width:130px;}
+  .stat-num{font-size:28px;font-weight:800;color:var(--green-neon);line-height:1;margin-bottom:4px;}
+  .stat-label{font-size:11px;font-weight:500;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;}
+
+  /* LEGEND */
+  .legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:36px;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--gray);}
+  .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+  /* FILTERS */
+  .filters-wrapper{background:rgba(20,4,45,.9);border:1px solid rgba(124,58,237,.3);border-radius:20px;padding:24px 28px;margin-bottom:40px;backdrop-filter:blur(16px);display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;}
+  .filter-group{display:flex;flex-direction:column;gap:8px;min-width:160px;flex:1;}
+  .filter-label{font-size:11px;font-weight:700;color:var(--purple-light);letter-spacing:.1em;text-transform:uppercase;}
+  .filter-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{font-size:12px;font-weight:600;padding:6px 16px;border-radius:100px;cursor:pointer;border:1px solid rgba(124,58,237,.4);background:rgba(124,58,237,.08);color:var(--gray);transition:all .2s;user-select:none;white-space:nowrap;}
+  .pill:hover{border-color:rgba(124,58,237,.7);color:var(--white);}
+  .pill.active{background:var(--purple-bright);border-color:var(--purple-bright);color:#fff;box-shadow:0 0 14px rgba(124,58,237,.4);}
+  .pill.active-green{background:var(--green-dark);border-color:var(--green-neon);color:#fff;box-shadow:0 0 14px rgba(0,255,136,.25);}
+  .filter-clear{font-size:12px;font-weight:600;padding:8px 20px;border-radius:100px;border:1px solid rgba(255,255,255,.15);background:transparent;color:var(--gray);cursor:pointer;transition:all .2s;align-self:flex-end;}
+  .filter-clear:hover{border-color:rgba(248,113,113,.5);color:#f87171;}
+  .results-count{font-size:12px;font-weight:500;color:var(--gray);align-self:flex-end;min-width:110px;text-align:right;}
+  .results-count span{color:var(--green-neon);font-weight:700;}
+
+  /* SECTION */
+  .section{margin-bottom:52px;}
+  .section-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+  .section-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .section-icon.grad{background:linear-gradient(135deg,#7c3aed,#a855f7);}
+  .section-icon.esp{background:linear-gradient(135deg,#b45309,#f59e0b);}
+  .section-icon.ms{background:linear-gradient(135deg,#0369a1,#38bdf8);}
+  .section-icon.dr{background:linear-gradient(135deg,#991b1b,#f87171);}
+  .section-title{font-size:22px;font-weight:700;color:var(--white);}
+  .section-desc{font-size:13px;font-weight:400;color:var(--gray);margin-top:2px;}
+  .section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--card-border),transparent);}
+
+  /* GRID */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
+
+  /* CARD */
+  .card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:24px;backdrop-filter:blur(12px);position:relative;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:default;}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple-bright),var(--green-neon));opacity:0;transition:opacity .25s;}
+  .card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,.6);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(124,58,237,.15);}
+  .card:hover::before{opacity:1;}
+  .card.highlight{border-color:rgba(0,255,136,.25);background:rgba(0,255,136,.03);}
+  .card.highlight::before{opacity:1;}
+  .card.hidden{display:none;}
+
+  /* CARD INNER */
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px;}
+  .card-badges{display:flex;flex-wrap:wrap;gap:6px;}
+  .badge{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:100px;white-space:nowrap;}
+  .badge-pub{background:rgba(0,255,136,.12);color:#00ff88;border:1px solid rgba(0,255,136,.3);}
+  .badge-priv{background:rgba(168,85,247,.12);color:#a855f7;border:1px solid rgba(168,85,247,.3);}
+  .badge-esp{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.3);}
+  .badge-ms{background:rgba(56,189,248,.1);color:#38bdf8;border:1px solid rgba(56,189,248,.3);}
+  .badge-dr{background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.3);}
+  .badge-ead{background:rgba(255,255,255,.06);color:#94a3b8;border:1px solid rgba(255,255,255,.12);}
+  .badge-pres{background:rgba(99,102,241,.12);color:#818cf8;border:1px solid rgba(99,102,241,.3);}
+  .badge-hip{background:rgba(99,102,241,.07);color:#6366f1;border:1px solid rgba(99,102,241,.2);}
+  .card-uni{font-size:11px;font-weight:700;color:var(--purple-light);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;}
+  .card-title{font-size:15px;font-weight:700;color:var(--white);line-height:1.35;margin-bottom:10px;}
+  .card-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px;}
+  .meta-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--gray);}
+  .meta-icon{font-size:13px;}
+  .card-desc{font-size:12.5px;color:#9585b8;line-height:1.6;margin-bottom:16px;}
+  .card-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--green-neon);text-decoration:none;transition:gap .2s;}
+  .card-link:hover{gap:10px;}
+  .card-link::after{content:'→';}
+
+  /* EMPTY */
+  .empty-state{display:none;text-align:center;padding:48px 20px;color:var(--gray);}
+  .empty-state.visible{display:block;}
+  .empty-icon{font-size:40px;margin-bottom:12px;opacity:.4;}
+  .empty-state p{font-size:13px;opacity:.7;}
+
+  /* DIVIDER */
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--card-border),transparent);margin:48px 0;}
+
+  /* ALERT */
+  .alert{display:flex;gap:12px;align-items:flex-start;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.2);border-radius:12px;padding:16px 20px;margin-bottom:28px;font-size:12.5px;color:#9585b8;line-height:1.6;}
+  .alert-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+
+  /* FOOTER */
+  .site-footer{margin-top:72px;position:relative;overflow:hidden;}
+  .footer-top{background:rgba(20,4,45,.95);border:1px solid rgba(124,58,237,.3);border-bottom:none;border-radius:24px 24px 0 0;padding:40px 40px 32px;backdrop-filter:blur(20px);display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;justify-content:space-between;}
+  .footer-brand{flex:1;min-width:220px;}
+  .footer-brand-name{font-size:28px;font-weight:900;letter-spacing:-.02em;background:linear-gradient(90deg,var(--green-neon),var(--purple-glow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+  .footer-brand-sub{font-size:12px;font-weight:500;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}
+  .footer-brand-desc{font-size:13px;color:#7a6b96;line-height:1.7;max-width:320px;}
+  .footer-info{flex:1;min-width:200px;}
+  .footer-info-title{font-size:11px;font-weight:700;color:var(--purple-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;}
+  .footer-info ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .footer-info li{font-size:12.5px;color:#7a6b96;display:flex;align-items:center;gap:8px;}
+  .footer-info li::before{content:'›';color:var(--green-neon);font-weight:700;}
+  .footer-shield{font-size:40px;animation:shield-pulse 3s ease-in-out infinite;}
+  @keyframes shield-pulse{0%,100%{filter:drop-shadow(0 0 4px rgba(0,255,136,.3))}50%{filter:drop-shadow(0 0 16px rgba(0,255,136,.7))}}
+  .footer-bottom{background:rgba(13,1,24,.98);border:1px solid rgba(124,58,237,.2);border-top:1px solid rgba(0,255,136,.15);border-radius:0 0 24px 24px;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .footer-sig{display:flex;align-items:center;gap:12px;}
+  .footer-sig-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--purple-bright),var(--green-dark));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+  .footer-sig-text strong{display:block;font-size:15px;font-weight:700;color:var(--white);}
+  .footer-sig-text span{font-size:11px;color:var(--gray);letter-spacing:.06em;}
+  .footer-copy{font-size:11px;color:#4a3c60;letter-spacing:.06em;text-align:right;}
+  .footer-copy strong{color:var(--green-neon);}
+</style>
+</head>
+<body>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">Atualizado em 2026</div>
+    <h1>Guia de Cursos em<br>Cibersegurança</h1>
+    <p class="hero-sub">Graduações, especializações, MBAs, mestrados e doutorados no Brasil — públicos e privados — verificados e atuais.</p>
+    <p class="hero-year">Brasil · 2026 · Educação em Cybersecurity</p>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">7+</div><div class="stat-label">Graduações</div></div>
+    <div class="stat-item"><div class="stat-num">10+</div><div class="stat-label">Especializações</div></div>
+    <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Mestrados</div></div>
+    <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">Doutorados</div></div>
+    <div class="stat-item"><div class="stat-num">232k</div><div class="stat-label">Vagas no BR (ISC²)</div></div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#00ff88"></div>Pública</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a855f7"></div>Privada</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Especialização</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div>Mestrado</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f87171"></div>Doutorado</div>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filters-wrapper">
+    <div class="filter-group">
+      <div class="filter-label">Tipo de Instituição</div>
+      <div class="filter-pills">
+        <span class="pill active" data-filter="tipo" data-value="all">Todas</span>
+        <span class="pill" data-filter="tipo" data-value="pub">🟢 Pública</span>
+        <span class="pill" data-filter="tipo" data-value="priv">🟣 Privada</span>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Nível do Curso</div>
+      <div class="filter-pills">
+        <span class="pill active" data-filter="nivel" data-value="all">Todos</span>
+        <span class="pill" data-filter="nivel" data-value="grad">🎓 Graduação</span>
+        <span class="pill" data-filter="nivel" data-value="esp">🛡️ Especialização</span>
+        <span class="pill" data-filter="nivel" data-value="ms">🔬 Mestrado</span>
+        <span class="pill" data-filter="nivel" data-value="dr">🎖️ Doutorado</span>
+      </div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Modalidade</div>
+      <div class="filter-pills">
+        <span class="pill active" data-filter="mod" data-value="all">Todas</span>
+        <span class="pill" data-filter="mod" data-value="pres">Presencial</span>
+        <span class="pill" data-filter="mod" data-value="ead">EAD / Online</span>
+        <span class="pill" data-filter="mod" data-value="hip">Híbrido</span>
+      </div>
+    </div>
+    <button class="filter-clear" onclick="clearFilters()">✕ Limpar</button>
+    <div class="results-count">Exibindo <span id="count">—</span> cursos</div>
+  </div>
+
+  <!-- ══ GRADUAÇÃO ══ -->
+  <div class="section" id="sec-grad">
+    <div class="section-header">
+      <div class="section-icon grad">🎓</div>
+      <div><div class="section-title">Graduação em Cibersegurança</div><div class="section-desc">Bacharelados e tecnólogos — públicas e privadas</div></div>
+      <div class="section-line"></div>
+    </div>
+    <div class="alert"><div class="alert-icon">⚡</div><div>A graduação específica em Cibersegurança é recente no Brasil. Em 2026, diversas federais estão em fase de implantação via Programa Universidades Inovadoras do MEC. Links verificados em março/2026.</div></div>
+    <div class="grid">
+      <div class="card" data-tipo="pub" data-nivel="grad" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Federal</span><span class="badge badge-pres">Presencial</span></div></div>
+        <div class="card-uni">UFU — Universidade Federal de Uberlândia</div>
+        <div class="card-title">Bacharelado em Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Uberlândia – MG</div><div class="meta-item"><span class="meta-icon">🕐</span>8 sem · Noturno</div><div class="meta-item"><span class="meta-icon">🎯</span>30 vagas/sem</div></div>
+        <div class="card-desc">Aprovado pelo Conselho Universitário em nov/2025. Ingresso via SiSU 2026, Faculdade de Engenharia Elétrica, campus Santa Mônica. Gratuito.</div>
+        <a class="card-link" href="https://comunica.ufu.br/noticias/2025/11/graduacoes-em-inteligencia-artificial-e-ciberseguranca-sao-aprovadas-pelo-conselho" target="_blank">Ver informações</a>
+      </div>
+      <div class="card highlight" data-tipo="priv" data-nivel="grad" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-pres">Presencial</span></div></div>
+        <div class="card-uni">PUC-Campinas</div>
+        <div class="card-title">Bacharelado em Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Campinas – SP</div><div class="meta-item"><span class="meta-icon">🕐</span>8 sem · Mat/Not</div><div class="meta-item"><span class="meta-icon">📋</span>3.217h · Rec. MEC</div></div>
+        <div class="card-desc">Um dos mais consolidados do país. Vestibular 2026 aberto. Top 10 privadas BR (RUF 2023). Formação operacional, tática e estratégica.</div>
+        <a class="card-link" href="https://www.puc-campinas.edu.br/graduacao/ciberseguranca/" target="_blank">Ver curso</a>
+      </div>
+      <div class="card" data-tipo="priv" data-nivel="grad" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-pres">Presencial</span></div></div>
+        <div class="card-uni">PUCPR — Pontifícia Universidade Católica do Paraná</div>
+        <div class="card-title">Bacharelado em CiberSegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Curitiba – PR</div><div class="meta-item"><span class="meta-icon">🕐</span>8 semestres</div><div class="meta-item"><span class="meta-icon">🏅</span>Único no Paraná</div></div>
+        <div class="card-desc">Único curso de graduação em CiberSegurança do Paraná. Mensalidades 2026 disponíveis. Corpo docente pesquisa avançada no PPGI. Metodologias ativas.</div>
+        <a class="card-link" href="https://www.pucpr.br/cursos-graduacao/ciberseguranca/" target="_blank">Ver curso</a>
+      </div>
+      <div class="card" data-tipo="priv" data-nivel="grad" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-pres">Presencial</span></div></div>
+        <div class="card-uni">CESAR School — Recife</div>
+        <div class="card-title">Tecnólogo em Segurança da Informação e Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Recife – PE</div><div class="meta-item"><span class="meta-icon">🕐</span>5 semestres</div><div class="meta-item"><span class="meta-icon">🏅</span>Nota 5 MEC · IGC 2025</div></div>
+        <div class="card-desc">Metodologia PBL. Projetos reais. Nota máxima MEC — 3,14% das IES atingem esse patamar. Próxima turma: 2026.2.</div>
+        <a class="card-link" href="https://www.cesar.school/graduacao/seguranca-da-informacao/" target="_blank">Ver curso</a>
+      </div>
+      <div class="card" data-tipo="priv" data-nivel="grad" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-pres">Presencial</span></div></div>
+        <div class="card-uni">UNIMAR — Universidade de Marília</div>
+        <div class="card-title">Bacharelado em Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Marília – SP</div><div class="meta-item"><span class="meta-icon">🗓️</span>Iniciado Fev/2026</div><div class="meta-item"><span class="meta-icon">🔬</span>4 labs novos</div></div>
+        <div class="card-desc">Primeira turma fev/2026. Grade voltada a certificações internacionais durante a graduação. Infraestrutura de ponta no interior de SP.</div>
+        <a class="card-link" href="https://blog.unimar.br/2026/03/03/unimar-inicia-aulas-do-novo-curso-de-ciberseguranca-com-infraestrutura-de-ponta-e-foco-em-carreira-internacional/" target="_blank">Ver curso</a>
+      </div>
+      <div class="card" data-tipo="priv" data-nivel="grad" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">UniCesumar</div>
+        <div class="card-title">Graduação em Segurança Cibernética</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>80% Online · 20% Presencial</div><div class="meta-item"><span class="meta-icon">🏅</span>Nota máxima MEC</div></div>
+        <div class="card-desc">Foco em vulnerabilidades, perícia forense, análise de malware e engenharia reversa. Semipresencial com suporte pedagógico. Opção flexível para quem trabalha.</div>
+        <a class="card-link" href="https://inscricoes.unicesumar.edu.br/curso/seguranca-cibernetica" target="_blank">Ver curso</a>
+      </div>
+      <div class="card" data-tipo="priv" data-nivel="grad" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">Unifaveni</div>
+        <div class="card-title">Tecnólogo em Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>100% Online</div><div class="meta-item"><span class="meta-icon">⏱️</span>Acesso flexível</div></div>
+        <div class="card-desc">Habilitação em forense digital, gestão de projetos de segurança, vulnerabilidades e proteção de dados. EAD de entrada acessível.</div>
+        <a class="card-link" href="https://unifaveni.com.br/curso/ciberseguranca-tecnologo-ead/" target="_blank">Ver curso</a>
+      </div>
+    </div>
+    <div class="empty-state" id="empty-grad"><div class="empty-icon">🔍</div><p>Nenhuma graduação corresponde aos filtros selecionados.</p></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ ESPECIALIZAÇÃO ══ -->
+  <div class="section" id="sec-esp">
+    <div class="section-header">
+      <div class="section-icon esp">🛡️</div>
+      <div><div class="section-title">Especialização & MBA — Lato Sensu</div><div class="section-desc">Pós-graduações em cibersegurança e segurança da informação</div></div>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid">
+
+      <!-- UTFPR -->
+      <div class="card highlight" data-tipo="pub" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Federal</span><span class="badge badge-esp">Especialização</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">UTFPR — Universidade Tecnológica Federal do Paraná</div>
+        <div class="card-title">Pós-Graduação em Segurança Cibernética (CESC/UTFPR)</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>100% EAD · Nacional</div><div class="meta-item"><span class="meta-icon">🗓️</span>Turma iniciada Mar/2026</div><div class="meta-item"><span class="meta-icon">💰</span>R$ 500 matrícula + 21x R$ 500</div></div>
+        <div class="card-desc">Especialização EAD com mestres e doutores da UTFPR. Grade: ISO/IEC 27001, LGPD, Linux para cyber, criptografia, firewall, VPN, IAM, CSIRTs e resposta a incidentes. Diploma federal — 40–60% mais barato que privadas equivalentes.</div>
+        <a class="card-link" href="https://cesc.utfpr.edu.br/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- PUCPR Pós -->
+      <div class="card" data-tipo="priv" data-nivel="esp" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-esp">Especialização</span><span class="badge badge-pres">Presencial</span></div></div>
+        <div class="card-uni">PUCPR — Escola Politécnica</div>
+        <div class="card-title">Pós-Graduação em Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Curitiba – PR</div><div class="meta-item"><span class="meta-icon">🤝</span>Cisco · Huawei · CompTIA</div><div class="meta-item"><span class="meta-icon">🗓️</span>Turma 2026 aberta</div></div>
+        <div class="card-desc">Módulos certificados pela Cisco, Huawei e CompTIA. Pesquisadores do PPGIA no corpo docente. Voltado a profissionais de TI, engenharia e áreas afins.</div>
+        <a class="card-link" href="https://estudenapuc.pucpr.br/pos-graduacao/cursos/ciberseguranca-curitiba/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- UFPE -->
+      <div class="card" data-tipo="pub" data-nivel="esp" data-mod="hip">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Federal</span><span class="badge badge-esp">Especialização</span><span class="badge badge-hip">Híbrido</span></div></div>
+        <div class="card-uni">UFPE — Dep. de Eletrônica e Sistemas</div>
+        <div class="card-title">Segurança Ofensiva e Inteligência Cibernética</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Recife – PE (+ Online)</div><div class="meta-item"><span class="meta-icon">🆕</span>2026: Residência Profissional</div></div>
+        <div class="card-desc">Migrou em 2026 para formato de Residência Profissional com chancela da UFPE. Aulas ao vivo com opção presencial em Recife. Docentes com publicações IEEE e Elsevier.</div>
+        <a class="card-link" href="https://sites.ufpe.br/seguranca-ofensiva/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- IDESP Cyber Security -->
+      <div class="card highlight" data-tipo="priv" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-esp">Especialização</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">IDESP — Instituto Daryus de Ensino Superior Paulista</div>
+        <div class="card-title">Pós-Graduação em Cyber Security</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>São Paulo – SP / Online</div><div class="meta-item"><span class="meta-icon">🏅</span>Nota 4 MEC · +30k alunos</div><div class="meta-item"><span class="meta-icon">🤝</span>Parceria Microsoft</div></div>
+        <div class="card-desc">Foco técnico: pentest em redes, aplicações web, wireless, IoT, OSINT e gestão de riscos cibernéticos. Coord. PhD candidate em AppSec e DevSecOps. Referência nacional — pioneiro em pós de cibersegurança no Brasil desde 2005. Avaliação técnica no seletivo.</div>
+        <a class="card-link" href="https://idesp.com.br/pos_graduacao/cyber-security/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- IDESP CTI -->
+      <div class="card" data-tipo="priv" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-esp">Especialização</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">IDESP — Instituto Daryus de Ensino Superior Paulista</div>
+        <div class="card-title">Pós-Graduação em Cyber Threat Intelligence (CTI)</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>Online ao vivo</div><div class="meta-item"><span class="meta-icon">🎯</span>MITRE · STIX · TAXII · DFIR</div><div class="meta-item"><span class="meta-icon">👤</span>Coord. Thiago Bordini</div></div>
+        <div class="card-desc">Pioneiro no Brasil em pós-graduação de CTI aberta ao mercado. Módulos: fundamentos, estratégias, ciclo de vida de inteligência, operação tática e estudo de caso real. Coord. Thiago Bordini — referência nacional em threat intelligence.</div>
+        <a class="card-link" href="https://idesp.com.br/pos_graduacao/cyber-threat-intelligence/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- IDESP Forense -->
+      <div class="card" data-tipo="priv" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-esp">Especialização</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">IDESP — Instituto Daryus de Ensino Superior Paulista</div>
+        <div class="card-title">Pós-Graduação em Forense Digital e Investigação Cibernética</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>Online ao vivo</div><div class="meta-item"><span class="meta-icon">🔎</span>Evidências · Custódia · MCFE</div><div class="meta-item"><span class="meta-icon">💻</span>Req.: i7 · 8GB · VMware</div></div>
+        <div class="card-desc">Perícia forense com casos reais. Docente Analista de Forense Digital do Gov. SP (10+ anos), pesquisadora ISO 17025 para labs forenses. Cert. MCFE (Magnet). Taxa de inscrição R$ 220 + avaliação técnica.</div>
+        <a class="card-link" href="https://idesp.com.br/pos_graduacao/forense-digital-e-investigacao-cibernetica/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- CECyber -->
+      <div class="card" data-tipo="priv" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-esp">Especialização</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">CECyber + Faculdade Facint</div>
+        <div class="card-title">Pós em Segurança da Informação e Inteligência Defensiva</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>100% Online</div><div class="meta-item"><span class="meta-icon">🔬</span>Labs práticos exclusivos</div></div>
+        <div class="card-desc">Alinhada a NIST CSF, MITRE ATT&CK, ISO 27001 e LGPD. Laboratórios práticos exclusivos. Docentes com certificações CEH e OSCP.</div>
+        <a class="card-link" href="https://ava.cecyber.com/loja/pos-seguranca-da-informacao/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- IBSEC -->
+      <div class="card" data-tipo="priv" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-esp">MBA / Pós Tech</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">IBSEC — Instituto Brasileiro de Cibersegurança</div>
+        <div class="card-title">MBA e Pós Tech em Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>Online</div><div class="meta-item"><span class="meta-icon">📚</span>SOC · Hacker Ético · Forense · Python</div></div>
+        <div class="card-desc">SOC, pentest, hacker ético, perícia digital, Python para cyber. Módulos de IA aplicada e Engenharia de Prompt para Cyber em 2026.</div>
+        <a class="card-link" href="https://ibsec.com.br/" target="_blank">Ver cursos</a>
+      </div>
+
+      <!-- Hackone -->
+      <div class="card" data-tipo="priv" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-esp">Especialização</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">Hackone</div>
+        <div class="card-title">Pós-Graduação em Redes e Cibersegurança</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">💻</span>Online</div><div class="meta-item"><span class="meta-icon">🗓️</span>Turma 2026.1 aberta</div><div class="meta-item"><span class="meta-icon">🎯</span>SIEM · SOAR · EDR · SOC</div></div>
+        <div class="card-desc">SIEM, SOAR, Firewall, EDR, resposta a incidentes e SOC moderno. Projetos reais e simulação de alertas.</div>
+        <a class="card-link" href="https://hackone.com.br/pgrc-redeseciber/" target="_blank">Ver curso</a>
+      </div>
+
+      <!-- USP LARC -->
+      <div class="card" data-tipo="pub" data-nivel="esp" data-mod="ead">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública (USP)</span><span class="badge badge-esp">MBA</span><span class="badge badge-ead">EAD</span></div></div>
+        <div class="card-uni">LARC / USP — Escola Politécnica</div>
+        <div class="card-title">MBA em Cibersegurança: Infraestrutura, Políticas e Gerenciamento</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>São Paulo – SP</div><div class="meta-item"><span class="meta-icon">👨‍🏫</span>Coord. Prof. Dr. Marcos Simplicio Jr.</div></div>
+        <div class="card-desc">MBA EAD coordenado pelo LARC/USP. Seleção por análise documental. Monografia de conclusão. Turmas via negociação corporativa.</div>
+        <a class="card-link" href="https://cursos.larc.usp.br/mba-ciberseguranca/" target="_blank">Ver MBA</a>
+      </div>
+
+    </div>
+    <div class="empty-state" id="empty-esp"><div class="empty-icon">🔍</div><p>Nenhuma especialização corresponde aos filtros selecionados.</p></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ MESTRADO ══ -->
+  <div class="section" id="sec-ms">
+    <div class="section-header">
+      <div class="section-icon ms">🔬</div>
+      <div><div class="section-title">Mestrado — Stricto Sensu</div><div class="section-desc">Programas com linhas de pesquisa em cibersegurança</div></div>
+      <div class="section-line"></div>
+    </div>
+    <div class="alert"><div class="alert-icon">ℹ️</div><div>No Brasil, ainda não há mestrado acadêmico <em>exclusivo</em> em Cibersegurança. Os programas abaixo possuem linhas de pesquisa dedicadas à área. Ingresso via processo seletivo interno.</div></div>
+    <div class="grid">
+      <div class="card highlight" data-tipo="pub" data-nivel="ms" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Federal</span><span class="badge badge-ms">Mestrado Acadêmico</span></div></div>
+        <div class="card-uni">UnB — Universidade de Brasília</div>
+        <div class="card-title">PPGI — Programa de Pós-Graduação em Informática</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Brasília – DF</div><div class="meta-item"><span class="meta-icon">🏅</span>CAPES Nota 6 — Excelência</div><div class="meta-item"><span class="meta-icon">🗓️</span>Seleção 2026/1 aberta</div></div>
+        <div class="card-desc">Nota 6 CAPES — excelência nacional. Linhas: CTI, Segurança de SDN, Conformidade LGPD, análise de malware. Bolsas CNPq ciclo 2026. Gratuito.</div>
+        <a class="card-link" href="https://ppgi.unb.br/pt/" target="_blank">Ver programa</a>
+      </div>
+      <div class="card" data-tipo="pub" data-nivel="ms" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Federal</span><span class="badge badge-ms">Mestrado Profissional</span></div></div>
+        <div class="card-uni">UFPE — Centro de Informática (CIn)</div>
+        <div class="card-title">PPGP-CC — Mestrado Profissional em Ciência da Computação</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Recife – PE</div><div class="meta-item"><span class="meta-icon">🏅</span>CAPES Nota 4 — Melhor PP Computação BR</div></div>
+        <div class="card-desc">Melhor Programa Profissional em Computação do Brasil (CAPES). Linhas de segurança em Sistemas Distribuídos e Ciência de Dados. Gratuito.</div>
+        <a class="card-link" href="https://portal.cin.ufpe.br/pos-graduacao/stricto-sensu/programa-profissional/" target="_blank">Ver programa</a>
+      </div>
+      <div class="card" data-tipo="priv" data-nivel="ms" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-ms">Mestrado Acadêmico</span></div></div>
+        <div class="card-uni">PUCPR</div>
+        <div class="card-title">PPGIA — Pós-Graduação em Informática Aplicada</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Curitiba – PR</div><div class="meta-item"><span class="meta-icon">🔬</span>Seg. Informação · ML · Containers</div></div>
+        <div class="card-desc">Pesquisa em segurança de sistemas, aprendizado de máquina para detecção de intrusões, redes e segurança de containers. Sustenta a graduação em CiberSegurança da instituição.</div>
+        <a class="card-link" href="https://www.pucpr.br/escola-politecnica/programa-de-pos-graduacao-em-informatica/" target="_blank">Ver programa</a>
+      </div>
+      <div class="card" data-tipo="pub" data-nivel="ms" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Estadual</span><span class="badge badge-ms">Mestrado Acadêmico</span></div></div>
+        <div class="card-uni">USP — EACH</div>
+        <div class="card-title">PPGSI — Programa de Pós-Graduação em Sistemas de Informação</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>São Paulo – SP</div><div class="meta-item"><span class="meta-icon">🔬</span>Segurança · Eng. Software · Gestão TI</div></div>
+        <div class="card-desc">Linha de pesquisa em Segurança da Informação: criptografia, privacidade, gestão de riscos e engenharia de segurança. Gratuito — ingresso por processo seletivo anual.</div>
+        <a class="card-link" href="https://ppgsi.each.usp.br/" target="_blank">Ver programa</a>
+      </div>
+    </div>
+    <div class="empty-state" id="empty-ms"><div class="empty-icon">🔍</div><p>Nenhum mestrado corresponde aos filtros selecionados.</p></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ DOUTORADO ══ -->
+  <div class="section" id="sec-dr">
+    <div class="section-header">
+      <div class="section-icon dr">🎖️</div>
+      <div><div class="section-title">Doutorado — Stricto Sensu</div><div class="section-desc">Programas de excelência com pesquisa avançada em segurança digital</div></div>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid">
+      <div class="card highlight" data-tipo="pub" data-nivel="dr" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Federal</span><span class="badge badge-dr">Doutorado Acadêmico</span></div></div>
+        <div class="card-uni">UnB — Universidade de Brasília</div>
+        <div class="card-title">PPGI — Doutorado em Informática (linha Cibersegurança)</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Brasília – DF</div><div class="meta-item"><span class="meta-icon">🏅</span>CAPES Nota 6 — Excelência</div><div class="meta-item"><span class="meta-icon">🗓️</span>Seleção aberta 2026/1</div></div>
+        <div class="card-desc">Linha explícita em CTI e segurança de SDN com nota 6 CAPES. Publicações IEEE, ACM e Springer. Bolsas PIBPG/CNPq disponíveis. Gratuito.</div>
+        <a class="card-link" href="https://ppgi.unb.br/pt/" target="_blank">Ver programa</a>
+      </div>
+      <div class="card" data-tipo="pub" data-nivel="dr" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-pub">Pública Federal</span><span class="badge badge-dr">Doutorado Profissional</span></div></div>
+        <div class="card-uni">UFPE — Centro de Informática (CIn)</div>
+        <div class="card-title">PPGP-CC — Doutorado Profissional em Ciência da Computação</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Recife – PE</div><div class="meta-item"><span class="meta-icon">🏅</span>CAPES Nota 4 — Melhor PP Computação BR</div></div>
+        <div class="card-desc">Resolução de problemas complexos de mercado. Segurança: infraestruturas críticas, forense digital e segurança em IA. Gratuito para bolsistas.</div>
+        <a class="card-link" href="https://portal.cin.ufpe.br/pos-graduacao/stricto-sensu/programa-profissional/" target="_blank">Ver programa</a>
+      </div>
+      <div class="card" data-tipo="priv" data-nivel="dr" data-mod="pres">
+        <div class="card-top"><div class="card-badges"><span class="badge badge-priv">Privada</span><span class="badge badge-dr">Doutorado Acadêmico</span></div></div>
+        <div class="card-uni">PUCPR</div>
+        <div class="card-title">PPGIA — Doutorado em Informática Aplicada (ênfase Segurança)</div>
+        <div class="card-meta"><div class="meta-item"><span class="meta-icon">📍</span>Curitiba – PR</div><div class="meta-item"><span class="meta-icon">👨‍🔬</span>Prof. Dr. Altair Santin — Doutor em CiberSeg</div></div>
+        <div class="card-desc">Pesquisador referência: Prof. Dr. Altair Olivo Santin. Publicações IEEE/Elsevier em detecção de intrusão, segurança de redes e autenticação adaptativa.</div>
+        <a class="card-link" href="https://www.pucpr.br/escola-politecnica/programa-de-pos-graduacao-em-informatica/" target="_blank">Ver programa</a>
+      </div>
+    </div>
+    <div class="empty-state" id="empty-dr"><div class="empty-icon">🔍</div><p>Nenhum doutorado corresponde aos filtros selecionados.</p></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Be Safe.</div>
+        <div class="footer-brand-sub">Mariana BS</div>
+        <div class="footer-brand-desc">Guia educacional de cursos em Cibersegurança no Brasil, compilado com dados verificados em março de 2026. Confirme disponibilidade e inscrições diretamente nos sites das instituições antes de tomar decisões.</div>
+      </div>
+      <div class="footer-info">
+        <div class="footer-info-title">Notas Importantes</div>
+        <ul>
+          <li>Cursos públicos (UFU, UnB, UFPE, USP, UTFPR) são gratuitos</li>
+          <li>Privadas oferecem ProUni, FIES e bolsas próprias</li>
+          <li>Links verificados e ativos em março/2026</li>
+          <li>Deficit BR: ~232 mil profissionais (ISC², 2023)</li>
+          <li>Trilha: Graduação → Certs → Especialização → M.Sc./Ph.D.</li>
+        </ul>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <div style="font-size:48px;animation:shield-pulse 3s ease-in-out infinite;">🛡️</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-sig">
+        <div class="footer-sig-icon">🔐</div>
+        <div class="footer-sig-text">
+          <strong>Be Safe — Mariana BS</strong>
+          <span>Cibersegurança · Brasil · 2026</span>
+        </div>
+      </div>
+      <div class="footer-copy">
+        Compilado por <strong>Mariana BS</strong><br>
+        Dados verificados em março de 2026
+      </div>
+    </div>
+  </footer>
+  <div style="height:40px"></div>
+
+</div><!-- /wrapper -->
+
+<script>
+  const state = { tipo:'all', nivel:'all', mod:'all' };
+
+  const secToNivel = { 'sec-grad':'grad', 'sec-esp':'esp', 'sec-ms':'ms', 'sec-dr':'dr' };
+  const emptyIds = { grad:'empty-grad', esp:'empty-esp', ms:'empty-ms', dr:'empty-dr' };
+
+  function applyFilters() {
+    const allCards = document.querySelectorAll('.card[data-tipo]');
+    let visible = 0;
+
+    allCards.forEach(card => {
+      const t = card.dataset.tipo, n = card.dataset.nivel, m = card.dataset.mod;
+      const ok = (state.tipo==='all'||t===state.tipo) && (state.nivel==='all'||n===state.nivel) && (state.mod==='all'||m===state.mod);
+      card.classList.toggle('hidden', !ok);
+      if(ok) visible++;
+    });
+
+    // section visibility + empty state
+    Object.entries(secToNivel).forEach(([secId, nv]) => {
+      const sec = document.getElementById(secId);
+      if(!sec) return;
+      const hideSection = state.nivel !== 'all' && state.nivel !== nv;
+      sec.style.display = hideSection ? 'none' : '';
+      if(!hideSection) {
+        const cards = sec.querySelectorAll('.card[data-tipo]:not(.hidden)');
+        const empty = document.getElementById(emptyIds[nv]);
+        if(empty) empty.classList.toggle('visible', cards.length === 0);
+      }
+    });
+
+    document.getElementById('count').textContent = visible;
+  }
+
+  document.querySelectorAll('.pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const fg = pill.dataset.filter, val = pill.dataset.value;
+      document.querySelectorAll(`.pill[data-filter="${fg}"]`).forEach(p => p.classList.remove('active','active-green'));
+      pill.classList.add(fg==='tipo' && val==='pub' ? 'active-green' : 'active');
+      state[fg] = val;
+      applyFilters();
+    });
+  });
+
+  function clearFilters() {
+    state.tipo='all'; state.nivel='all'; state.mod='all';
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active','active-green'));
+    document.querySelectorAll('.pill[data-value="all"]').forEach(p => p.classList.add('active'));
+    applyFilters();
+  }
+
+  document.addEventListener('DOMContentLoaded', applyFilters);
+</script>
+</body>
+</html>
